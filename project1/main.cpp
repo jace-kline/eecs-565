@@ -1,47 +1,50 @@
 #include <fstream>
 #include <iostream>
-#include "Store.h"
-#include "Generator.h"
+#include "Vigenere.h"
 
-void readDict(Store& store, std::string filename);
-void run(Store& store, std::string cipher_text, const int key_len, const int first_word_len);
+void tryWord(std::ofstream& o, std::string& p, std::string& c, unsigned int key_len, unsigned int first_word_len);
+void run(std::string cipher_text, unsigned int key_len, unsigned int first_word_len);
 
 int main(int argc, char** argv) {
     // We are assuming that we receive 3 input arguments
     // ./prog <cipher_text> <key_len> <first_word_len>
     std::string cipher_text = argv[1];
-    short key_len = argv[2][0] - '0';
-    short first_word_len = argv[3][0] - '0';
+    unsigned int key_len = std::stoi(argv[2]);
+    unsigned int first_word_len = std::stoi(argv[3]);
 
-    Store store;
-    readDict(store, "dict.txt");
-    run(store, cipher_text, key_len, first_word_len);
+    cipher_text = toLower(cipher_text);
+    std::cout << "Cipher Text Input: " << cipher_text << '\n';
+    std::cout << "Key length: " << key_len << '\n';
+    std::cout << "First word length: " << first_word_len << '\n';
+    run(cipher_text, key_len, first_word_len);
     return 0;
 }
 
-void readDict(Store& store, std::string filename) {
-    std::string s;
-    std::ifstream fs;
-    fs.open(filename);
-    while(fs >> s) {
-        store.insert(s);
+void tryWord(std::ofstream& o, std::string& p, std::string& c, unsigned int key_len, unsigned int first_word_len) {
+    std::string p1 = p.substr(0,first_word_len);
+    std::string p2 = p.substr(0,key_len);
+    std::string c1 = c.substr(0,first_word_len);
+    std::string c2 = c.substr(0,key_len);
+    std::string k = decrypt(p2, c2);
+    for(unsigned int i = key_len; i < first_word_len; i++) {
+        if(decryptChar(p1.at(i), c1.at(i)) != k.at(i % key_len)) return;
     }
-    fs.close();
+    o << "Key: " << k << "\nDecrypted Text: " << decrypt(k, c) << "\n\n";
 }
 
-void run(Store& store, std::string cipher_text, const int key_len, const int first_word_len) {
+void run(std::string cipher_text, unsigned int key_len, unsigned int first_word_len) {
+    std::string s;
     std::ofstream os;
     os.open("out.txt");
-    Generator g = Generator(key_len);
-    std::string p, fw;
-
-    while(true) {
-        p = decrypt(g.getStr(), cipher_text);
-        std::cout << g.getStr() << '\n';
-        fw = p.substr(0,first_word_len - 1);
-        if(store.contains(fw)) os << p << '\n';
-        if(g.iterate()) break;
+    std::ifstream fs;
+    fs.open("dict.txt");
+    std::string s2;
+    while(fs >> s) {
+        if(s.length() == first_word_len) {
+            s2 = toLower(s);
+            tryWord(os, s2, cipher_text, key_len, first_word_len);
+        }
     }
-
+    fs.close();
     os.close();
-}
+ }

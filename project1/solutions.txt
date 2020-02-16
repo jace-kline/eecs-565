@@ -1,0 +1,66 @@
+(1)
+Cipher Text: MSOKKJCOSXOEEKDTOSLGFWCMCHSUSGX
+Key Length: 2
+First Word Length: 6
+Key: ks
+Decrypted Text: caesarswifemustbeabovesuspicion
+Time Taken:
+    real    0m0.050s
+    user    0m0.043s
+    sys     0m0.008s
+
+(2)
+Cipher Text: OOPCULNWFRCFQAQJGPNARMEYUODYOUNRGWORQEPVARCEPBBSCEQYEARAJUYGWWYACYWBPRNEJBMDTEAEYCCFJNENSGWAQRTSJTGXNRQRMDGFEEPHSJRGFCFMACCB
+Key Length: 3
+First Word Length: 7
+Key: jay
+Decrypted Text: fortunewhichhasagreatdealofpowerinothermattersbutespeciallyinwarcanbringaboutgreatchangesinasituationthroughveryslightforces
+Time Taken:
+    real    0m0.019s
+    user    0m0.019s
+    sys     0m0.000s
+
+(3)
+Cipher Text: MTZHZEOQKASVBDOWMWMKMNYIIHVWPEXJA
+Key Length: 4
+First Word Length: 10
+Key: iwkd
+Decrypted Text: experienceistheteacherofallthings
+Time Taken:
+    real    0m0.022s
+    user    0m0.022s
+    sys     0m0.001s
+
+(4)
+Cipher Text: HUETNMIXVTMQWZTQMMZUNZXNSSBLNSJVSJQDLKR
+Key Length: 5
+First Word Length: 11
+Key: zienf
+Decrypted Text: imaginationismoreimportantthanknowledge
+Time Taken:
+    real    0m0.053s
+    user    0m0.049s
+    sys     0m0.004s
+
+(5)
+Cipher Text: LDWMEKPOPSWNOAVBIDHIPCEWAETYRVOAUPSINOVDIEDHCDSELHCCPVHRPOHZUSERSFS
+Key Length: 6
+First Word Length: 9
+Key: hacker
+Decrypted Text: educationiswhatremainsafteronehasforgottenwhatonehaslearnedinschool
+Time Taken:
+    real    0m0.066s
+    user    0m0.065s
+    sys     0m0.001s
+
+(6)
+Cipher Text: LDWMEKPOPSWNOAVBIDHIPCEWAETYRVOAUPSINOVDIEDHCDSELHCCPVHRPOHZUSERSFS
+Key Length: 7
+First Word Length: 13
+Key: nichols
+Decrypted Text: intellectualssolveproblemsgeniusespreventthem
+Time Taken:
+    real    0m0.049s
+    user    0m0.041s
+    sys     0m0.008s
+

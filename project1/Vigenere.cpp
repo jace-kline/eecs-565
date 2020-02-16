@@ -1,11 +1,12 @@
 #include "Vigenere.h"
 
 int charToInt(char c) {
-    return(c - (c >= 'A' && c <='Z' ? 'A' : 'a'));
+    if(c >= 65 && c <= 90) return (int)(c - 65);
+    else return((int)(c - 97));
 }
 
 char intToChar(int i) {
-    return(i + 'a');
+    return((char)(i + 97));
 }
 
 char encryptChar(char key, char plain) {
@@ -13,29 +14,30 @@ char encryptChar(char key, char plain) {
 }
 
 char decryptChar(char key, char cipher) {
-    return(intToChar((charToInt(cipher) - charToInt(key)) % 26));
+    int i = (charToInt(cipher) - charToInt(key)) % 26;
+    if(i < 0) i += 26; // Because C++ % operator can return negative numbers
+    return(intToChar(i));
 }
 
 std::string encrypt(std::string key, std::string plain) {
-    unsigned short cursor_key = 0;
-    unsigned short cursor_plain = 0;
-    std::string cipher = "";
-    while(cursor_plain < plain.length()) {
-        cipher.push_back(encryptChar(key.at(cursor_key), plain.at(cursor_plain)));
-        cursor_key = (cursor_key + 1) % key.length();
-        cursor_plain++;
+    int key_len = key.length();
+    for(int i = 0; i < plain.length(); i++) {
+        plain.at(i) = encryptChar(key.at(i % key_len), plain.at(i));
     }
-    return cipher;
+    return(plain);
 }
 
 std::string decrypt(std::string key, std::string cipher) {
-    unsigned short cursor_key = 0;
-    unsigned short cursor_cipher = 0;
-    std::string plain = "";
-    while(cursor_cipher < cipher.length()) {
-        plain.push_back(decryptChar(key.at(cursor_key), cipher.at(cursor_cipher)));
-        cursor_key = (cursor_key + 1) % key.length();
-        cursor_cipher++;
+    int key_len = key.length();
+    for(int i = 0; i < cipher.length(); i++) {
+        cipher.at(i) = decryptChar(key.at(i % key_len), cipher.at(i));
     }
-    return plain;
+    return(cipher);
+}
+
+std::string toLower(std::string s) {
+    for(int i = 0; i < s.length(); i++) {
+        s.at(i) = tolower(s.at(i));
+    }
+    return s;
 }
