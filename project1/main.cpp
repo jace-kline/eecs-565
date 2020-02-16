@@ -20,6 +20,8 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+// This is the algorithm that is performed for each string of length
+// equal to the first word length. If good candidate -> write to file.
 void tryWord(std::ofstream& o, std::string& p, std::string& c, unsigned int key_len, unsigned int first_word_len) {
     std::string p1 = p.substr(0,first_word_len);
     std::string p2 = p.substr(0,key_len);
@@ -43,7 +45,7 @@ void run(std::string cipher_text, unsigned int key_len, unsigned int first_word_
         if(s.length() == first_word_len) {
             s2 = toLower(s);
             tryWord(os, s2, cipher_text, key_len, first_word_len);
-        }
+        } else if(s.length() > first_word_len) break; // Past the words of interest
     }
     fs.close();
     os.close();
