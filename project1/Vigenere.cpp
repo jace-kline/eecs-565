@@ -41,3 +41,12 @@ std::string toLower(std::string s) {
     }
     return s;
 }
+
+std::string removeSpaces(std::string s) {
+    int i = 0;
+    while(i < s.length()) {
+        if(s.at(i) == ' ') s.erase(i,1);
+        else i++;
+    }
+    return s;
+}
